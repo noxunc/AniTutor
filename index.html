@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강원애니고 & 대학 포트폴리오 입시 과외 | 김선경</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face { font-family: 'Paperozi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-1Thin.woff2') format('woff2'); font-weight: 100; font-display: swap; }
+        @font-face { font-family: 'Paperozi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+        @font-face { font-family: 'Paperozi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'Paperozi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+        @font-face { font-family: 'Paperozi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-9Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #e8e8e8; font-family: 'Paperozi', sans-serif; color: #1a1a1a; line-height: 1.6; overflow-x: hidden; }
+
+        /* [데스크탑] 사이드 네비게이션 */
+        .side-nav { position: fixed; left: 50px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; gap: 45px; transition: 0.3s; }
+        .side-nav::before { content: ''; position: absolute; width: 2px; height: 110%; background: rgba(0,0,0,0.15); z-index: -1; }
+        .dot { width: 25px; height: 25px; background-color: #e8e8e8; border: 3px solid #000; border-radius: 50%; cursor: pointer; transition: all 0.4s ease; position: relative; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .dot:hover { background-color: #000; }
+        .dot.active { background-color: #000; transform: scale(1.2); }
+        .dot span { position: absolute; left: 45px; font-size: 0.9rem; font-weight: 700; color: #000; opacity: 0.3; transition: 0.3s; white-space: nowrap; pointer-events: none; }
+        .dot.active span { opacity: 1; transform: translateX(5px); }
+
+        /* 섹션 설정 */
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 100px 5vw 100px 200px; width: 100%; transition: padding 0.3s; }
+
+        /* 히어로 섹션 */
+        #home h1 { font-weight: 900; font-size: clamp(1.8rem, 6vw, 4.8rem); line-height: 1.15; margin-bottom: 30px; letter-spacing: -2px; text-align: center; word-break: keep-all; }
+        #home p { font-weight: 300; font-size: clamp(0.9rem, 2vw, 1.6rem); color: #444; text-align: center; }
+        .keep-together { display: inline-block; white-space: nowrap; }
+
+        /* 카드 및 공통 스타일 */
+        .content-card { background: rgba(255, 255, 255, 0.6); padding: clamp(20px, 5vw, 60px); border-radius: 40px; max-width: 1100px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.05); margin-bottom: 50px; }
+        .content-card h2 { font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 40px; border-left: 10px solid #000; padding-left: 25px; text-align: left; }
+        .info-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; margin-bottom: 40px; align-items: start; }
+        .info-item h3 { font-weight: 700; font-size: 1.5rem; margin-bottom: 20px; color: #000; }
+        .info-item p { font-weight: 400; font-size: clamp(0.85rem, 1.1vw, 1.1rem); color: #333; margin-bottom: 10px; }
+        .info-item span { font-weight: 800; color: #000; }
+
+        /* Software 태그 스타일 */
+        .tag-container { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .tag { background: transparent; color: #000; padding: 6px 14px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: 2px solid #000; }
+
+        /* 상세 버튼 */
+        .detail-btn-container { display: flex; justify-content: flex-end; align-self: center; }
+        .detail-btn { font-family: 'Paperozi', sans-serif; padding: 15px 30px; border: 2px solid #000; background: transparent; color: #000; cursor: pointer; border-radius: 10px; font-weight: 700; transition: 0.3s; font-size: 0.95rem; }
+        .detail-btn:hover { background: #000; color: #fff; }
+
+        /* 모달 팝업 스타일 */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
+        .modal-content { background: #fff; padding: 40px; border-radius: 30px; max-width: 700px; width: 90%; position: relative; animation: slideUp 0.4s ease; max-height: 90vh; overflow-y: auto; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close-modal { position: absolute; top: 20px; right: 30px; font-size: 2rem; cursor: pointer; font-weight: 900; }
+        .modal-body h3 { font-family: 'Paperozi', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 25px; font-weight: 900; border-bottom: 3px solid #000; padding-bottom: 10px; display: inline-block; }
+        .modal-body h4 { font-size: 1.2rem; margin: 20px 0 10px 0; font-weight: 800; color: #000; }
+        .modal-body p { font-family: 'Paperozi', sans-serif; font-size: 1rem; line-height: 1.8; color: #444; margin-bottom: 15px; }
+        .modal-body ul { margin-bottom: 20px; list-style: none; }
+        .modal-body li { position: relative; padding-left: 20px; margin-bottom: 8px; font-size: 0.95rem; color: #555; }
+        .modal-body li::before { content: '•'; position: absolute; left: 0; font-weight: 900; color: #000; }
+        .modal-footer-text { margin-top: 30px; padding-top: 20px; border-top: 1px dashed #ccc; font-weight: 600; color: #1a1a1a; font-size: 0.9rem; }
+
+        /* 비디오 */
+        .video-wrapper { position: relative; width: 100%; border-radius: 25px; overflow: hidden; background: #000; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .video-wrapper video { width: 100%; display: block; }
+
+        /* 연락처 섹션 */
+        #contact { text-align: center; padding-left: 200px; width: 100%; } 
+        .contact-container { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .contact-title { font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 20px; display: inline-block; position: relative; padding: 0 20px; }
+        .contact-title::before, .contact-title::after { content: ''; position: absolute; top: 50%; width: 40px; height: 4px; background: #000; transform: translateY(-50%); }
+        .contact-title::before { left: -40px; }
+        .contact-title::after { right: -40px; }
+        .contact-subtitle { font-size: clamp(0.85rem, 2.5vw, 1.2rem); font-weight: 500; color: #555; margin-bottom: 40px; word-break: keep-all; }
+        .contact-box { background: #fff; padding: 20px 40px; border-radius: 100px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; }
+        .contact-box:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .phone-num { font-size: clamp(1.2rem, 5vw, 1.8rem); font-weight: 300; color: #000; letter-spacing: 1px; }
+        .copy-hint { display: block; font-size: 0.75rem; color: #aaa; margin-top: 5px; font-weight: 400; }
+
+        /* [모바일] */
+        @media (max-width: 768px) {
+            body { font-size: clamp(12px, 3.5vw, 16px); }
+            .side-nav { display: none; }
+            section, #contact { padding: 60px 4vw; }
+            .content-card { padding: 25px 20px; }
+            .info-grid { grid-template-columns: 1fr; gap: 25px; }
+            .detail-btn-container { justify-content: flex-start; margin-top: 10px; }
+            .contact-title::before, .contact-title::after { display: none; }
+            .info-item p { word-break: keep-all; }
+            .modal-content { padding: 30px 20px; }
+        }
+
+        /* [태블릿] */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .side-nav { left: 40px; }
+            .dot span { display: none !important; }
+            section, #contact { padding-left: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="side-nav">
+        <a href="#home" class="dot active"><span>WELCOME</span></a>
+        <a href="#profile" class="dot"><span>TUTOR</span></a>
+        <a href="#manga" class="dot"><span>만화창작과</span></a>
+        <a href="#animation" class="dot"><span>애니메이션과</span></a>
+        <a href="#portfolio" class="dot"><span>포트폴리오 전형</span></a>
+        <a href="#contact" class="dot"><span>CONTACT</span></a>
+    </nav>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalBody" class="modal-body"></div>
+        </div>
+    </div>
+
+    <section id="home">
+        <h1>강원애니고 입시 및<br>대학 포트폴리오 전형 과외</h1>
+        <p>
+            <span class="keep-together">개인별 맞춤 커리큘럼으로</span> 
+            <span class="keep-together">합격의 방향을 제시합니다.</span>
+        </p>
+    </section>
+
+    <section id="profile">
+        <div class="content-card">
+            <h2>Artist & Tutor</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>김선경</h3>
+                    <p><span>Education.</span> 강원애니고 졸업 / 청강대 애니과 전공</p>
+                    <p><span>Career.</span> 키링스튜디오, 데브시스터즈, 계향쓰 등 다수의 프로젝트 참여</p>
+                </div>
+                <div class="info-item">
+                    <h3>Software</h3>
+                    <div class="tag-container">
+                        <span class="tag">Maya</span><span class="tag">3ds Max</span><span class="tag">Clip Studio</span><span class="tag">Photoshop</span><span class="tag">After Effects</span>
+                    </div>
+                </div>
+            </div>
+            <div class="video-wrapper">
+                <video src="https://res.cloudinary.com/delc12dhr/video/upload/v1768045496/portfolio_g7jjqb.mp4" autoplay loop muted playsinline controls></video>
+            </div>
+        </div>
+    </section>
+
+    <section id="manga">
+        <div class="content-card">
+            <h2>만화창작과 입시</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <p style="font-weight: 500; margin-bottom: 20px;">주어진 제시어에 맞춰 15컷 이내의 칸만화 제작 진행 및 줄거리 작성</p>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 3시간 30분-40분 내 칸만화 작업 진행</li>
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 20-30분 500자 원고지에 맞춰 줄거리 작성</li>
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 1시간 피드백 및 수업 리포트 제공</li>
+                    </ul>
+                </div>
+                <div class="detail-btn-container">
+                    <button class="detail-btn" onclick="openModal('manga')">상세 설명보기 →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="animation">
+        <div class="content-card">
+            <h2>애니메이션과 입시</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <p style="font-weight: 500; margin-bottom: 20px;">주어진 제시어에 맞춰 12칸의 스토리보드 제작 및 이야기 구성</p>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 3시간 30분 내 스토리보드 작업 진행</li>
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 30분 1000자 원고지에 맞춰 이야기 구성 작성</li>
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 1시간 피드백 및 수업 리포트 제공</li>
+                    </ul>
+                </div>
+                <div class="detail-btn-container">
+                    <button class="detail-btn" onclick="openModal('animation')">상세 설명보기 →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="content-card">
+            <h2>포트폴리오 전형</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <p style="font-weight: 500; margin-bottom: 20px;">캐릭터, 스토리, 세계관, 애니메이션 제작 등 대학 면접전형을 위한 포트폴리오 작업</p>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 프리 프로덕션 진행에 따른 피드백 진행</li>
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> Clip Studio 또는 Maya 등 2D,3D 프로그램 공부</li>
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 최소 1년동안 진행, 작품 2개 이상 제작 목표 설정</li>
+                    </ul>
+                </div>
+                <div class="detail-btn-container">
+                    <button class="detail-btn" onclick="openModal('portfolio')">상세 설명보기 →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-container">
+            <h2 class="contact-title">CONTACT</h2>
+            <p class="contact-subtitle">첫 상담은 무료입니다. 상담 시, 그림실력을 알 수 있는 작업물을 들고 와 주세요.</p>
+            <div class="contact-box" onclick="copyContact()">
+                <span class="phone-num">010-7385-7122</span>
+                <span class="copy-hint">번호 클릭 시 복사됩니다</span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const detailData = {
+            manga: { 
+                title: "만화창작과 상세 커리큘럼", 
+                content: `
+                    <h4>드로잉 기초 및 서사 훈련 (현재~7월)</h4>
+                    <ul>
+                        <li>크로키를 통한 인체 파악 및 드로잉 속도 향상</li>
+                        <li>원고지 줄거리 작성 및 1:1 글 피드백 (서사 구성력 강화)</li>
+                        <li>칸 연출 및 기본 채색 기법 습득</li>
+                    </ul>
+                    <h4>실전 풀타임 트레이닝 (8월~입시)</h4>
+                    <ul>
+                        <li>4시간 집중 모의고사 진행 (실전 감각 극대화)</li>
+                        <li>시간 단축 노하우 및 고득점 연출 전략 전수</li>
+                    </ul>
+                    <p class="modal-footer-text">모든 수업은 학생의 페이스에 맞춰 단계적으로 난이도를 조절하며, 1:1 밀착 지도를 진행합니다.<br>상세 비용은 상담 시 안내해 드립니다.</p>
+                ` 
+            },
+            animation: { 
+                title: "애니메이션과 상세 커리큘럼", 
+                content: `
+                    <h4>연출 기초 및 서사 훈련 (현재~7월)</h4>
+                    <ul>
+                        <li>크로키를 통한 드로잉 속도 향상과 기초 투시를 활용한 배경 속 인물 배치</li>
+                        <li>원고지 작성 및 1:1 서사 피드백 (논리적인 이야기 전개와 개연성 강화)</li>
+                        <li>화면 앵글(샷)의 이해와 말풍선 없이도 상황이 전달되는 직관적인 연출 습득</li>
+                    </ul>
+                    <h4>실전 풀타임 트레이닝 (8월~입시)</h4>
+                    <ul>
+                        <li>4시간 집중 모의고사 진행 (실전 감각 극대화)</li>
+                        <li>가독성 극대화 노하우 및 고득점 지문 작성 전략 전수</li>
+                    </ul>
+                    <p class="modal-footer-text">모든 수업은 학생의 페이스에 맞춰 단계적으로 난이도를 조절하며, 1:1 밀착 지도를 진행합니다.<br>상세 비용은 상담 시 안내해 드립니다.</p>
+                ` 
+            },
+            portfolio: { 
+                title: "포트폴리오 전형 상세 커리큘럼", 
+                content: `
+                    <h4>프리 프로덕션 및 기획 (현재~5월)</h4>
+                    <ul>
+                        <li>세계관 및 캐릭터 설정, 독창적인 스토리 기획, 캐릭터 시트 제작 피드백</li>
+                        <li>학생의 스타일에 맞는 툴(Clip Studio, Maya 등) 선정 및 2D/3D 애니메이션 기술 지도</li>
+                        <li>대학별 합격 포트폴리오 분석을 통한 학생만의 독보적인 강점 추출</li>
+                    </ul>
+                    <h4>메인 프로덕션 및 완성 (6월~제출)</h4>
+                    <ul>
+                        <li>기획안을 바탕으로 실제 포트폴리오에 담길 메인 작품 완성 (일러스트, 영상 등)</li>
+                        <li>포트폴리오 구성 및 편집을 통해 레이아웃 구성과 가독성 높은 작품집 정리</li>
+                        <li>제출 전 완성도 극대화 및 기획 의도와 작업물의 일치성 확인</li>
+                    </ul>
+                    <p><strong>1차에 통과할 경우, 2차를 위한 예비면접을 진행 합니다.</strong></p>
+                    <p class="modal-footer-text">모든 수업은 학생의 페이스에 맞춰 단계적으로 난이도를 조절하며, 1:1 밀착 지도를 진행합니다.<br>상세 비용은 상담 시 안내해 드립니다.</p>
+                ` 
+            }
+        };
+
+        function openModal(type) {
+            const modal = document.getElementById('detailModal');
+            const body = document.getElementById('modalBody');
+            body.innerHTML = `<h3>${detailData[type].title}</h3>${detailData[type].content}`;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('detailModal').style.display = 'none'; }
+
+        function copyContact() {
+            const phoneNum = "010-7385-7122";
+            navigator.clipboard.writeText(phoneNum).then(() => { alert("연락처가 복사되었습니다: " + phoneNum); });
+        }
+
+        const dots = document.querySelectorAll('.dot');
+        const sections = document.querySelectorAll('section');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= (sectionTop - sectionHeight / 3)) { current = section.getAttribute('id'); }
+            });
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('href').includes(current)) { dot.classList.add('active'); }
+            });
+        });
+
+        window.onclick = function(event) { if (event.target == document.getElementById('detailModal')) { closeModal(); } }
+    </script>
+</body>
+</html>
