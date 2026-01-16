@@ -112,6 +112,7 @@
         <a href="#manga" class="dot"><span>만화창작과</span></a>
         <a href="#animation" class="dot"><span>애니메이션과</span></a>
         <a href="#portfolio" class="dot"><span>포트폴리오 전형</span></a>
+        <a href="#hobby" class="dot"><span>취미반</span></a>
         <a href="#contact" class="dot"><span>CONTACT</span></a>
     </nav>
 
@@ -209,6 +210,25 @@
         </div>
     </section>
 
+    <section id="hobby">
+        <div class="content-card">
+            <h2>취미반</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <p style="font-weight: 500; margin-bottom: 20px;">자신만의 그림 스타일을 찾고, 기초부터 작품 완성까지 즐겁게 배우는 클래스</p>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 드로잉 기초 및 프로그램에 따른 채색 방법 전수</li>
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 일러스트, 짧은 만화, GIF 애니메이션 등 개인 목표 설정</li>
+                        <li style="margin-bottom: 12px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; font-weight: 900;">•</span> 바쁜 일상 속에서도 꾸준히 지속할 수 있는 맞춤형 스케줄</li>
+                    </ul>
+                </div>
+                <div class="detail-btn-container">
+                    <button class="detail-btn" onclick="openModal('hobby')">상세 설명보기 →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact">
         <div class="contact-container">
             <h2 class="contact-title">CONTACT</h2>
@@ -273,6 +293,24 @@
                     </ul>
                     <p><strong>1차에 통과할 경우, 2차를 위한 예비면접을 진행 합니다.</strong></p>
                     <p class="modal-footer-text">모든 수업은 학생의 페이스에 맞춰 단계적으로 난이도를 조절하며, 1:1 밀착 지도를 진행합니다.<br>상세 비용은 상담 시 안내해 드립니다.</p>
+                ` 
+            },
+            hobby: { 
+                title: "취미반 상세 안내", 
+                content: `
+                    <h4>개인별 창작 목표 수립</h4>
+                    <ul>
+                        <li>입시보다는 가볍게 일러스트, 애니메이션을 배우고 싶은 분께 추천</li>
+                        <li>디지털 드로잉 입문 (Clip Studio, Photoshop 등 기본 툴 활용법)</li>
+                        <li>디지털 아트이기때문에 타블렛,태블릿(아이패드),노트북 등이 필수</li>
+                    </ul>
+                    <h4>작품 완성 과정</h4>
+                    <ul>
+                        <li>주간 단위로 작품(일러스트,GIF 등) 제작</li>
+                        <li>개인 포트폴리오(취미용) 및 SNS 연재용 만화 제작</li>
+                        <li>창작의 즐거움을 유지하며 지속 가능한 습관 만들기</li>
+                    </ul>
+                    <p class="modal-footer-text">성인, 직장인, 학생 등 누구나 참여 가능하며 본인의 속도에 맞춰 진행됩니다.<br>상세 비용은 상담 시 안내해 드립니다.</p>
                 ` 
             }
         };
